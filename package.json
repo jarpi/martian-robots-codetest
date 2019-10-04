@@ -4,7 +4,9 @@
   "description": "A codetest to remote control mars robot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "APP_PORT=10010 node index.js",
+    "dev": "APP_PORT=10010 node node_modules/gulp/bin/gulp.js",
+    "test": "mocha lib/**/tests/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/jarpi/martian-robots-codetest/issues"
   },
-  "homepage": "https://github.com/jarpi/martian-robots-codetest#readme"
+  "homepage": "https://github.com/jarpi/martian-robots-codetest#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.1"
+  }
 }

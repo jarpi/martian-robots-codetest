@@ -1,0 +1,19 @@
+{
+  "name": "martian-robots",
+  "version": "1.0.0",
+  "description": "A codetest to remote control mars robot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarpi/martian-robots-codetest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jarpi/martian-robots-codetest/issues"
+  },
+  "homepage": "https://github.com/jarpi/martian-robots-codetest#readme"
+}

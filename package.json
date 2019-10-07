@@ -7,7 +7,9 @@
     "start": "APP_PORT=10010 node index.js",
     "dev": "APP_PORT=10010 node node_modules/gulp/bin/gulp.js",
     "test": "mocha lib/**/tests/**/*.js",
-    "tdd": "gulp default"
+    "tdd": "gulp default",
+    "lint": "gulp standard",
+    "ci": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",

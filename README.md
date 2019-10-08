@@ -19,9 +19,9 @@
   - Grab the postman tests and environment files from src/api/test/postman
 
 # Trello
-  - You can follow the development [![in this board ](https://trello.com/b/ZTYXWWRF/martian-robots)
+  - You can follow the development [in this board ](https://trello.com/b/ZTYXWWRF/martian-robots)
 
 # Docker image
   - Travis CI in place that builds and pushes the docker image to dockerhub registry
-  [![Docker image](https://hub.docker.com/r/jarpi/martian-robots-codetest)
+  [Docker image](https://hub.docker.com/r/jarpi/martian-robots-codetest)
   ``` docker pull jarpi/martian-robots-codetest && docker run -p 8080:8080 jarpi/martian-robots-codetest ```

@@ -26,7 +26,15 @@ class RobotService {
       this.orientation = (orientation ? this.orientation.getNodeByData(orientation) : this.orientation)
       robotInstructionParserInstance.getRobotCommands()[i].split('')
         .forEach(instruction => {
-          this.move(instruction)
+          try {
+            this.move(instruction)
+          } catch (e) {
+            if (e.message === 'command_runner::execute::invalidCommand') {
+              throw new Error(`unexisting_command:${instruction}`)
+            } else {
+              throw e
+            }
+          }
         })
       robotReporter.add(`${this.getPosition().x} ${this.getPosition().y} ${this.getOrientation()}` + (this.isLost ? ' LOST' : ''))
       this.isLost = false

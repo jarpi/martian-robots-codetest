@@ -7,8 +7,9 @@ describe('API', function () {
     httpServer.close()
     done()
   })
+
   describe('POST /execute-robot-instructions', function () {
-    it('should return correct output if valid instructions', function (done) {
+    it('should return correct output when valid instructions', async () => {
       request(server)
         .post('/execute-robot-instructions')
         .send({ instructions: '5 3\n1 1 E\nRFRFRFRF' })
@@ -17,10 +18,24 @@ describe('API', function () {
         .expect(200)
         .end(function (err, res) {
           if (err) {
-            return done(err)
+            throw err
           }
           expect(res.body.output).to.be.equal('1 1 E')
-          done()
+        })
+    })
+
+    it('should return error when not valid instructions', async () => {
+      request(server)
+        .post('/execute-robot-instructions')
+        .send({ instructions: '5 3\n1 1 E\nT' })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(400)
+        .end(function (err, res) {
+          if (err) {
+            throw err
+          }
+          expect(res.body.error).to.be.equal('unexisting_command:T')
         })
     })
   })

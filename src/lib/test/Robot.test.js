@@ -150,4 +150,13 @@ describe('Robot/*', () => {
     const result = robotInstance.run('5 3\n1 1 E\nRFRFRFRF\n3 2 N\nFRRFLLFFRRFLL\n0 3 W\nLLFFFLFLFL')
     expect(result).to.be.equal('1 1 E\n3 3 N LOST\n2 3 S')
   })
+
+  it('should return error for unexisting command', async () => {
+    const robotInstance = new RobotService()
+    try {
+      robotInstance.run('5 3\n1 1 E\nT')
+    } catch (e) {
+      expect(e.message).to.be.equal('unexisting_command:T')
+    }
+  })
 })

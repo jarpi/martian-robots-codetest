@@ -19,6 +19,7 @@ const commands = {
 class CommandRunner {
   execute (orientation, x, y, grid, lostPositions, type) {
     const command = type === 'F' ? commands[type][orientation.getValue()] : commands[type]
+    if (!command) throw new Error('command_runner::execute::invalidCommand')
     return command.run(x, y, orientation, grid, lostPositions)
   }
 }

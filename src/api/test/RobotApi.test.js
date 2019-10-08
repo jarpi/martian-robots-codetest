@@ -4,7 +4,6 @@ const [server, httpServer] = require('../../../index.js')
 
 describe('API', function () {
   after(function (done) {
-    console.dir(server)
     httpServer.close()
     done()
   })

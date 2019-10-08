@@ -6,7 +6,7 @@ git:
 services:
   - docker
 script: npm run ci
-after_script:
+before_deploy:
   - docker build -t jarpi/martian-robots-codetest .  
 deploy:
   provider: script

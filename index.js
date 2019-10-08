@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const RobotRouter = require('./src/api/routes/Robot/index.js')
 
-const port = process.env.PORT || 100010
+const port = process.env.PORT || 30010
 
 app.use('/', RobotRouter)
 

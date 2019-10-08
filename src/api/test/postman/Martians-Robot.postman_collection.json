@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "cc9fa6f6-1141-43c0-889e-7ff4dda5a578",
+		"name": "Martians-Robot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Simple use case - turn around",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94e83fab-6490-44ef-a5d3-049ad4671ee1",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.output).to.eql('1 1 E');",
+							"});",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(202);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"instructions\":\"5 3\\n1 1 E\\nRFRFRFRF\"}"
+				},
+				"url": {
+					"raw": "{{HTTP}}://{{HOST}}:{{PORT}}/execute-robot-instructions",
+					"protocol": "{{HTTP}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"execute-robot-instructions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simple use case - max width",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "445b558a-8a0d-4f00-b983-50a87fbffede",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.output).to.eql('3 3 N LOST');",
+							"});",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(202);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"instructions\":\"5 3\\n3 2 N\\nFRRFLLFFRRFLL\"}"
+				},
+				"url": {
+					"raw": "{{HTTP}}://{{HOST}}:{{PORT}}/execute-robot-instructions",
+					"protocol": "{{HTTP}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"execute-robot-instructions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simple use case - reach limits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "445b558a-8a0d-4f00-b983-50a87fbffede",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.output).to.eql('1 1 E\\n3 3 N LOST');",
+							"});",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(202);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"instructions\":\"5 3\\n1 1 E\\nRFRFRFRF\\n3 2 N\\nFRRFLLFFRRFLL\"}"
+				},
+				"url": {
+					"raw": "{{HTTP}}://{{HOST}}:{{PORT}}/execute-robot-instructions",
+					"protocol": "{{HTTP}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"execute-robot-instructions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simple use case - preserve scent of the fallen",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "445b558a-8a0d-4f00-b983-50a87fbffede",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.output).to.eql('1 1 E\\n3 3 N LOST\\n2 3 S');",
+							"});",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(202);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"instructions\":\"5 3\\n1 1 E\\nRFRFRFRF\\n3 2 N\\nFRRFLLFFRRFLL\\n0 3 W\\nLLFFFLFLFL\"}"
+				},
+				"url": {
+					"raw": "{{HTTP}}://{{HOST}}:{{PORT}}/execute-robot-instructions",
+					"protocol": "{{HTTP}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"execute-robot-instructions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simple use case - should return error when invalid input",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "445b558a-8a0d-4f00-b983-50a87fbffede",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.error).to.eql('unexisting_node::U');",
+							"});",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.eql(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"instructions\":\"5 3\\n1 1 U\\nRFRFRFRF\\n3 2 N\\nFRRFLLFFRRFLL\\n0 3 W\\nLLFFFLFLFL\"}"
+				},
+				"url": {
+					"raw": "{{HTTP}}://{{HOST}}:{{PORT}}/execute-robot-instructions",
+					"protocol": "{{HTTP}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"execute-robot-instructions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

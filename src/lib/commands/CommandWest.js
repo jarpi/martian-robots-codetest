@@ -7,10 +7,7 @@ const run = (x, y, orientation, grid, lostPositions) => {
   const isInvalidMove = isLost(x, y, grid)
   if (!isInvalidMove) return { x: x - 1, y, orientation, isInvalidMove }
   if (isInvalidMove && lostPositions[x + ':' + y]) return { x, y, orientation, isInvalidMove: false }
-  if (isInvalidMove) {
-    lostPositions[x + ':' + y] = true
-    return { x, y, orientation, isInvalidMove }
-  }
+  return { x, y, orientation, isInvalidMove }
 }
 
 module.exports = {

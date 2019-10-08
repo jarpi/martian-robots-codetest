@@ -19,7 +19,7 @@ describe('Commands/', () => {
         expect(result.y).to.be.equal(1)
       })
 
-      it('invalid coordinates should update lostPositions', async () => {
+      it('invalid coordinates should not update lostPositions', async () => {
         const orientation = {}
         const lostPositions = {}
         const result = NorthCommand.run(
@@ -32,7 +32,7 @@ describe('Commands/', () => {
         expect(result.y).to.be.equal(0)
         expect(result.orientation).to.be.equal(orientation)
         expect(result.isInvalidMove).to.be.equal(true)
-        expect(lostPositions['0:0']).to.be.equal(true)
+        expect(lostPositions['0:0']).to.be.equal(undefined)
       })
 
       it('invalid coordinates existing in lostPositions should return input params', async () => {
@@ -63,7 +63,7 @@ describe('Commands/', () => {
         expect(result.y).to.be.equal(0)
       })
 
-      it('invalid coordinates should update lostPositions', async () => {
+      it('invalid coordinates should not update lostPositions', async () => {
         const orientation = {}
         const lostPositions = {}
         const result = SouthCommand.run(
@@ -76,7 +76,7 @@ describe('Commands/', () => {
         expect(result.y).to.be.equal(0)
         expect(result.orientation).to.be.equal(orientation)
         expect(result.isInvalidMove).to.be.equal(true)
-        expect(lostPositions['0:0']).to.be.equal(true)
+        expect(lostPositions['0:0']).to.be.equal(undefined)
       })
 
       it('invalid coordinates existing in lostPositions should return input params', async () => {
@@ -107,7 +107,7 @@ describe('Commands/', () => {
         expect(result.x).to.be.equal(1)
       })
 
-      it('invalid coordinates should update lostPositions', async () => {
+      it('invalid coordinates should not update lostPositions', async () => {
         const orientation = {}
         const lostPositions = {}
         const result = SouthCommand.run(
@@ -120,7 +120,7 @@ describe('Commands/', () => {
         expect(result.y).to.be.equal(0)
         expect(result.orientation).to.be.equal(orientation)
         expect(result.isInvalidMove).to.be.equal(true)
-        expect(lostPositions['0:0']).to.be.equal(true)
+        expect(lostPositions['0:0']).to.be.equal(undefined)
       })
 
       it('invalid coordinates existing in lostPositions should return input params', async () => {
@@ -151,7 +151,7 @@ describe('Commands/', () => {
         expect(result.x).to.be.equal(0)
       })
 
-      it('invalid coordinates should update lostPositions', async () => {
+      it('invalid coordinates should not update lostPositions', async () => {
         const orientation = {}
         const lostPositions = {}
         const result = SouthCommand.run(
@@ -164,7 +164,7 @@ describe('Commands/', () => {
         expect(result.y).to.be.equal(0)
         expect(result.orientation).to.be.equal(orientation)
         expect(result.isInvalidMove).to.be.equal(true)
-        expect(lostPositions['0:0']).to.be.equal(true)
+        expect(lostPositions['0:0']).to.be.equal(undefined)
       })
 
       it('invalid coordinates existing in lostPositions should return input params', async () => {

@@ -18,7 +18,6 @@ describe('Commands/', () => {
           getPrevious: _ => 'W'
         }, 0, 0, { widht: 1, height: 1 }, {}, 'T')
       } catch (e) {
-        console.dir(e)
         expect(e.message).to.be.equal('command_runner::execute::invalidCommand')
       }
     })

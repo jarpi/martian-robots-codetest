@@ -11,4 +11,13 @@ const httpServer = app.listen(port, _ => {
   console.log('curl -XPOST -H "Content-Type: application/json" -d \'{"instructions":"5 3\\n1 1 E\\nRFRFRFRF"}\' http://127.0.0.1:' + port + '/execute-robot-instructions')
 })
 
+process.on('uncaughtException', (err) => {
+    console.error(`uncaughtException::${err}`)
+    process.exit(1)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(`unhandledRejection::${promise}::${reason}`)
+})
+
 module.exports = [app, httpServer] // for testing

@@ -1,9 +1,11 @@
 const express = require('express')
 const app = express()
 const RobotRouter = require('./src/api/routes/Robot/index.js')
+const logger = require('express-bunyan-logger');
 
 const port = process.env.PORT || 30010
 
+app.use(logger());
 app.use('/', RobotRouter)
 
 const httpServer = app.listen(port, _ => {

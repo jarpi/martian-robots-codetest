@@ -17,10 +17,14 @@ const commands = {
 }
 
 class CommandRunner {
-  execute (orientation, x, y, grid, lostPositions, type) {
-    const command = type === 'F' ? commands[type][orientation.getValue()] : commands[type]
+  execute (orientation, x, y, grid, lostPositions, type, subtype) {
+    const command = this.isSubCommand(type, subtype) ? commands[type][subtype] : commands[type]
     if (!command) throw new Error('command_runner::execute::invalidCommand')
     return command.run(x, y, orientation, grid, lostPositions)
+  }
+
+  isSubCommand (type, subtype) {
+    return commands[type] && commands[type][subtype]
   }
 }
 

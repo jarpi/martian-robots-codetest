@@ -62,7 +62,8 @@ class RobotService {
       this.position.y,
       this.grid,
       this.lostPositions,
-      type
+      type,
+      this.orientation.getValue()
     )
     if (result.isInvalidMove) {
       this.lostPositions[this.position.x + ':' + this.position.y] = true

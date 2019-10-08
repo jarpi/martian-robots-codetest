@@ -39,4 +39,14 @@ describe('DoubleLinkedList/*', () => {
     list.append('b')
     expect(list.getNodeByData('b').getValue()).to.be.equal('b')
   })
+
+  it('should throw an error if node doesn\'t exist', async () => {
+    const list = new DoubleLinkedList('a', null, null)
+    list.append('b')
+    try {
+      list.getNodeByData('c')
+    } catch (e) {
+      expect(e.message).to.be.equal('unexisting_node::c')
+    }
+  })
 })

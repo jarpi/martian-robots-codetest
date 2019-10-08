@@ -151,12 +151,68 @@ describe('Robot/*', () => {
     expect(result).to.be.equal('1 1 E\n3 3 N LOST\n2 3 S')
   })
 
-  it('should return error for unexisting command', async () => {
+  it('should throw error for unexisting command', done => {
     const robotInstance = new RobotService()
     try {
       robotInstance.run('5 3\n1 1 E\nT')
+      done(new Error('catch not reached'))
     } catch (e) {
       expect(e.message).to.be.equal('unexisting_command:T')
+      done()
+    }
+  })
+
+  it('should throw error for unexisting coordinate X', done => {
+    const robotInstance = new RobotService()
+    try {
+      robotInstance.run('5 3\n6 1 E\nL')
+      done(new Error('catch not reached'))
+    } catch (e) {
+      expect(e.message).to.be.equal('unexisting_coordinate:X')
+      done()
+    }
+  })
+
+  it('should throw error for unexisting coordinate Y', done => {
+    const robotInstance = new RobotService()
+    try {
+      robotInstance.run('5 3\n1 4 E\nL')
+      done(new Error('catch not reached'))
+    } catch (e) {
+      expect(e.message).to.be.equal('unexisting_coordinate:Y')
+      done()
+    }
+  })
+
+  it('should throw error for unexisting orientation', done => {
+    const robotInstance = new RobotService()
+    try {
+      robotInstance.run('5 3\n1 1 U\nL')
+      done(new Error('catch not reached'))
+    } catch (e) {
+      expect(e.message).to.be.equal('unexisting_node::U')
+      done()
+    }
+  })
+
+  it('should throw error for negative coordinates for grid', done => {
+    const robotInstance = new RobotService()
+    try {
+      robotInstance.run('-5 3\n1 1 E\nL')
+    } catch (e) {
+      expect(e.message).to.be.equal('invalid_grid_coordinate::WIDTH')
+      done()
+    }
+  })
+
+  it('should throw error for negative coordinates for grid', done => {
+    const robotInstance = new RobotService()
+    try {
+      robotInstance.run('5 -3\n1 1 E\nL')
+      done(new Error('catch not reached'))
+    } catch (e) {
+      expect(e.message).to.be.equal('invalid_grid_coordinate::HEIGHT')
+      done()
     }
   })
 })

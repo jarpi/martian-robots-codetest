@@ -19,9 +19,21 @@ class RobotService {
     robotInstructionParserInstance.parse(instructions)
     if (robotInstructionParserInstance.getRobotInitInstructions().length !==
         robotInstructionParserInstance.getRobotCommands().length) return
+    if (robotInstructionParserInstance.getGrid().width < 0) {
+      throw new Error('invalid_grid_coordinate::WIDTH')
+    }
+    if (robotInstructionParserInstance.getGrid().height < 0) {
+      throw new Error('invalid_grid_coordinate::HEIGHT')
+    }
     this.grid = robotInstructionParserInstance.getGrid()
     robotInstructionParserInstance.getRobotInitInstructions().forEach((c, i) => {
       const [x, y, orientation] = robotInstructionParserInstance.getRobotInitCommand(c)
+      if (x < 0 || x > this.grid.width) {
+        throw new Error('unexisting_coordinate:X')
+      }
+      if (y < 0 || y > this.grid.height) {
+        throw new Error('unexisting_coordinate:Y')
+      }
       this.position = { x: parseInt(x), y: parseInt(y) }
       this.orientation = (orientation ? this.orientation.getNodeByData(orientation) : this.orientation)
       robotInstructionParserInstance.getRobotCommands()[i].split('')

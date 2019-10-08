@@ -10,6 +10,7 @@ class DoubleLinkedList {
     this.lastNode.next = new DoubleLinkedList(data, this, this.lastNode)
     this.previous = this.lastNode.next
     this.lastNode = this.lastNode.next
+    this.nodeCount += 1
     return this
   }
 
@@ -27,10 +28,14 @@ class DoubleLinkedList {
 
   getNodeByData (value) {
     let node = this
-    while (node.data !== value) {
+    const lastValue = node.getPrevious().data
+    while (node.data !== value && node.data !== lastValue) {
       node = node.getNext()
     }
-    return node
+    if (node.getValue() === value) {
+      return node
+    }
+    throw new Error(`unexisting_node::${value}`)
   }
 }
 

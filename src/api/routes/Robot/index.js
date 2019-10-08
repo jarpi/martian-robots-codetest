@@ -9,7 +9,7 @@ robotRouter.post('/execute-robot-instructions', jsonParser, (req, res, next) => 
   if (!req.body.instructions) return next({ statusCode: 400, msg: 'Missing instructions' })
   try {
     const result = robotServiceInstance.run(req.body.instructions)
-    return res.set('Content-Type', 'application/json').status(200).send(JSON.stringify({ output: result }))
+    return res.set('Content-Type', 'application/json').status(202).send(JSON.stringify({ output: result }))
   } catch (e) {
     return next(e)
   }

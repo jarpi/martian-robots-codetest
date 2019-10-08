@@ -15,7 +15,7 @@ describe('API', function () {
         .send({ instructions: '5 3\n1 1 E\nRFRFRFRF' })
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(200)
+        .expect(202)
         .end(function (err, res) {
           if (err) {
             throw err

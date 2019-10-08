@@ -12,4 +12,4 @@ ENV NODE_ENV PRODUCTION
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "forever" ]

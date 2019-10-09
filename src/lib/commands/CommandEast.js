@@ -1,4 +1,5 @@
 const isLost = (x, y, grid, lostPositions) => {
+  if (x + 1 > 50) throw new Error('invalid_coordinate::X>50')
   if (x + 1 > grid.width) return true
   return false
 }

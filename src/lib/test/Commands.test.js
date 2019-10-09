@@ -50,6 +50,21 @@ describe('Commands/', () => {
         expect(result.isInvalidMove).to.be.equal(false)
         expect(lostPositions['0:0']).to.be.equal(true)
       })
+
+      it('should throw an error if coordinate value > 50', done => {
+        try {
+          NorthCommand.run(
+            0,
+            50,
+            {},
+            { width: 5, height: 50 },
+            {})
+          done(new Error('Exception not thrown'))
+        } catch (e) {
+          expect(e.message).to.be.equal('invalid_coordinate::Y>50')
+          done()
+        }
+      })
     })
 
     describe('South', async () => {
@@ -137,6 +152,21 @@ describe('Commands/', () => {
         expect(result.orientation).to.be.equal(orientation)
         expect(result.isInvalidMove).to.be.equal(false)
         expect(lostPositions['0:0']).to.be.equal(true)
+      })
+
+      it('should throw an error if coordinate value > 50', done => {
+        try {
+          NorthCommand.run(
+            0,
+            50,
+            {},
+            { width: 5, height: 50 },
+            {})
+          done(new Error('Exception not thrown'))
+        } catch (e) {
+          expect(e.message).to.be.equal('invalid_coordinate::Y>50')
+          done()
+        }
       })
     })
 

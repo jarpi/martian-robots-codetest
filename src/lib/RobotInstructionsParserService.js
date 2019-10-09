@@ -34,7 +34,8 @@ class RobotInstructionParserService {
   }
 
   getRobotInitCommand (values) {
-    return values.split(' ')
+    const [x, y, orientation] = values.split(' ')
+    return [{ x: parseInt(x), y: parseInt(y) }, orientation]
   }
 }
 

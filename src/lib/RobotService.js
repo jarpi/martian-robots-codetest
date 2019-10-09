@@ -22,9 +22,9 @@ class RobotService {
     this.grid = robotInstructionParserServiceInstance.getGrid()
     robotInstructionParserServiceInstance.getRobotInitInstructions()
       .forEach((c, i) => {
-        const [x, y, orientation] = robotInstructionParserServiceInstance.getRobotInitCommand(c)
-        this.validatePositionCoordinates(x, y)
-        this.position = { x: parseInt(x), y: parseInt(y) }
+        const [position, orientation] = robotInstructionParserServiceInstance.getRobotInitCommand(c)
+        this.validatePositionCoordinates(position)
+        this.position = position
         this.orientation = (orientation ? this.orientation.getNodeByData(orientation) : this.orientation)
         robotInstructionParserServiceInstance.getRobotCommands()[i].split('')
           .forEach(instruction => {
@@ -41,7 +41,7 @@ class RobotService {
         robotReporterService.add(`${this.getPosition().x} ${this.getPosition().y} ${this.getOrientation()}` + (this.isLost ? ' LOST' : ''))
         this.isLost = false
       })
-    return robotReporterService.get('\n')
+    return robotReporterService.format('\n')
   }
 
   move (type) {
@@ -85,11 +85,11 @@ class RobotService {
     }
   }
 
-  validatePositionCoordinates (x, y) {
-    if (x < 0 || x > this.grid.width || x > 50) {
+  validatePositionCoordinates (position) {
+    if (position.x < 0 || position.x > this.grid.width || position.x > 50) {
       throw new Error('unexisting_coordinate::X')
     }
-    if (y < 0 || y > this.grid.height || x > 50) {
+    if (position.y < 0 || position.y > this.grid.height || position.x > 50) {
       throw new Error('unexisting_coordinate::Y')
     }
   }

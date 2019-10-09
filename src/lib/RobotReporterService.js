@@ -11,7 +11,7 @@ class RobotReporterService {
     this.reports.push(log)
   }
 
-  get (separator) {
+  format (separator) {
     return this.reports.join(separator)
   }
 }

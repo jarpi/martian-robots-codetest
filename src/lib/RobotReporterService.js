@@ -2,7 +2,7 @@
   @param instructions format ...
   @return {} ...
 */
-class RobotReporter {
+class RobotReporterService {
   constructor () {
     this.reports = []
   }
@@ -16,4 +16,4 @@ class RobotReporter {
   }
 }
 
-module.exports = RobotReporter
+module.exports = RobotReporterService

@@ -1,7 +1,7 @@
 const DoubleLinkedList = require('./utils/DoubleLinkedList')
 const CommandRunner = require('./commands/CommandRunner.js')
-const RobotInstructionParser = require('./RobotInstructionsParser.js')
-const RobotReporter = require('./RobotReporter.js')
+const RobotInstructionParserService = require('./RobotInstructionsParserService.js')
+const RobotReporterService = require('./RobotReporterService.js')
 
 class RobotService {
   constructor () {
@@ -14,20 +14,20 @@ class RobotService {
   }
 
   run (instructions) {
-    const robotReporter = new RobotReporter()
-    const robotInstructionParserInstance = new RobotInstructionParser()
-    robotInstructionParserInstance.parse(instructions)
-    if (robotInstructionParserInstance.getRobotInitInstructions().length !==
-        robotInstructionParserInstance.getRobotCommands().length) return
-    if (robotInstructionParserInstance.getGrid().width < 0) {
+    const robotReporterService = new RobotReporterService()
+    const robotInstructionParserServiceInstance = new RobotInstructionParserService()
+    robotInstructionParserServiceInstance.parse(instructions)
+    if (robotInstructionParserServiceInstance.getRobotInitInstructions().length !==
+        robotInstructionParserServiceInstance.getRobotCommands().length) return
+    if (robotInstructionParserServiceInstance.getGrid().width < 0) {
       throw new Error('invalid_grid_coordinate::WIDTH')
     }
-    if (robotInstructionParserInstance.getGrid().height < 0) {
+    if (robotInstructionParserServiceInstance.getGrid().height < 0) {
       throw new Error('invalid_grid_coordinate::HEIGHT')
     }
-    this.grid = robotInstructionParserInstance.getGrid()
-    robotInstructionParserInstance.getRobotInitInstructions().forEach((c, i) => {
-      const [x, y, orientation] = robotInstructionParserInstance.getRobotInitCommand(c)
+    this.grid = robotInstructionParserServiceInstance.getGrid()
+    robotInstructionParserServiceInstance.getRobotInitInstructions().forEach((c, i) => {
+      const [x, y, orientation] = robotInstructionParserServiceInstance.getRobotInitCommand(c)
       if (x < 0 || x > this.grid.width || x > 50) {
         throw new Error('unexisting_coordinate::X')
       }
@@ -36,7 +36,7 @@ class RobotService {
       }
       this.position = { x: parseInt(x), y: parseInt(y) }
       this.orientation = (orientation ? this.orientation.getNodeByData(orientation) : this.orientation)
-      robotInstructionParserInstance.getRobotCommands()[i].split('')
+      robotInstructionParserServiceInstance.getRobotCommands()[i].split('')
         .forEach(instruction => {
           try {
             this.move(instruction)
@@ -48,10 +48,10 @@ class RobotService {
             }
           }
         })
-      robotReporter.add(`${this.getPosition().x} ${this.getPosition().y} ${this.getOrientation()}` + (this.isLost ? ' LOST' : ''))
+      robotReporterService.add(`${this.getPosition().x} ${this.getPosition().y} ${this.getOrientation()}` + (this.isLost ? ' LOST' : ''))
       this.isLost = false
     })
-    return robotReporter.get('\n')
+    return robotReporterService.get('\n')
   }
 
   move (type) {

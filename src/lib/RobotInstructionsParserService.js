@@ -2,7 +2,7 @@
   @param instructions format ...
   @return {} ...
 */
-class RobotInstructionParser {
+class RobotInstructionParserService {
   constructor () {
     this.grid = {}
     this.robotInitInstructions = []
@@ -38,4 +38,4 @@ class RobotInstructionParser {
   }
 }
 
-module.exports = RobotInstructionParser
+module.exports = RobotInstructionParserService

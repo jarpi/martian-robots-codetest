@@ -28,11 +28,11 @@ class RobotService {
     this.grid = robotInstructionParserInstance.getGrid()
     robotInstructionParserInstance.getRobotInitInstructions().forEach((c, i) => {
       const [x, y, orientation] = robotInstructionParserInstance.getRobotInitCommand(c)
-      if (x < 0 || x > this.grid.width) {
-        throw new Error('unexisting_coordinate:X')
+      if (x < 0 || x > this.grid.width || x > 50) {
+        throw new Error('unexisting_coordinate::X')
       }
-      if (y < 0 || y > this.grid.height) {
-        throw new Error('unexisting_coordinate:Y')
+      if (y < 0 || y > this.grid.height || x > 50) {
+        throw new Error('unexisting_coordinate::Y')
       }
       this.position = { x: parseInt(x), y: parseInt(y) }
       this.orientation = (orientation ? this.orientation.getNodeByData(orientation) : this.orientation)
@@ -42,7 +42,7 @@ class RobotService {
             this.move(instruction)
           } catch (e) {
             if (e.message === 'command_runner::execute::invalidCommand') {
-              throw new Error(`unexisting_command:${instruction}`)
+              throw new Error(`unexisting_command::${instruction}`)
             } else {
               throw e
             }

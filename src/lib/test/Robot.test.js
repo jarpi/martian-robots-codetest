@@ -157,7 +157,7 @@ describe('Robot/*', () => {
       robotInstance.run('5 3\n1 1 E\nT')
       done(new Error('catch not reached'))
     } catch (e) {
-      expect(e.message).to.be.equal('unexisting_command:T')
+      expect(e.message).to.be.equal('unexisting_command::T')
       done()
     }
   })
@@ -168,7 +168,18 @@ describe('Robot/*', () => {
       robotInstance.run('5 3\n6 1 E\nL')
       done(new Error('catch not reached'))
     } catch (e) {
-      expect(e.message).to.be.equal('unexisting_coordinate:X')
+      expect(e.message).to.be.equal('unexisting_coordinate::X')
+      done()
+    }
+  })
+
+  it('should throw error for invalid coordinate X', done => {
+    const robotInstance = new RobotService()
+    try {
+      robotInstance.run('50 3\n51 1 E\nL')
+      done(new Error('catch not reached'))
+    } catch (e) {
+      expect(e.message).to.be.equal('unexisting_coordinate::X')
       done()
     }
   })
@@ -179,7 +190,18 @@ describe('Robot/*', () => {
       robotInstance.run('5 3\n1 4 E\nL')
       done(new Error('catch not reached'))
     } catch (e) {
-      expect(e.message).to.be.equal('unexisting_coordinate:Y')
+      expect(e.message).to.be.equal('unexisting_coordinate::Y')
+      done()
+    }
+  })
+
+  it('should throw error for unexisting coordinate Y', done => {
+    const robotInstance = new RobotService()
+    try {
+      robotInstance.run('5 50\n1 51 E\nL')
+      done(new Error('catch not reached'))
+    } catch (e) {
+      expect(e.message).to.be.equal('unexisting_coordinate::Y')
       done()
     }
   })

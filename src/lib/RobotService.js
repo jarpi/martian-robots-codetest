@@ -17,40 +17,30 @@ class RobotService {
     const robotReporterService = new RobotReporterService()
     const robotInstructionParserServiceInstance = new RobotInstructionParserService()
     robotInstructionParserServiceInstance.parse(instructions)
-    if (robotInstructionParserServiceInstance.getRobotInitInstructions().length !==
-        robotInstructionParserServiceInstance.getRobotCommands().length) return
-    if (robotInstructionParserServiceInstance.getGrid().width < 0) {
-      throw new Error('invalid_grid_coordinate::WIDTH')
-    }
-    if (robotInstructionParserServiceInstance.getGrid().height < 0) {
-      throw new Error('invalid_grid_coordinate::HEIGHT')
-    }
+    this.validateInstructions(robotInstructionParserServiceInstance.getRobotInitInstructions(), robotInstructionParserServiceInstance.getRobotCommands())
+    this.validateGridCoordinates(robotInstructionParserServiceInstance.getGrid())
     this.grid = robotInstructionParserServiceInstance.getGrid()
-    robotInstructionParserServiceInstance.getRobotInitInstructions().forEach((c, i) => {
-      const [x, y, orientation] = robotInstructionParserServiceInstance.getRobotInitCommand(c)
-      if (x < 0 || x > this.grid.width || x > 50) {
-        throw new Error('unexisting_coordinate::X')
-      }
-      if (y < 0 || y > this.grid.height || x > 50) {
-        throw new Error('unexisting_coordinate::Y')
-      }
-      this.position = { x: parseInt(x), y: parseInt(y) }
-      this.orientation = (orientation ? this.orientation.getNodeByData(orientation) : this.orientation)
-      robotInstructionParserServiceInstance.getRobotCommands()[i].split('')
-        .forEach(instruction => {
-          try {
-            this.move(instruction)
-          } catch (e) {
-            if (e.message === 'command_runner::execute::invalidCommand') {
-              throw new Error(`unexisting_command::${instruction}`)
-            } else {
-              throw e
+    robotInstructionParserServiceInstance.getRobotInitInstructions()
+      .forEach((c, i) => {
+        const [x, y, orientation] = robotInstructionParserServiceInstance.getRobotInitCommand(c)
+        this.validatePositionCoordinates(x, y)
+        this.position = { x: parseInt(x), y: parseInt(y) }
+        this.orientation = (orientation ? this.orientation.getNodeByData(orientation) : this.orientation)
+        robotInstructionParserServiceInstance.getRobotCommands()[i].split('')
+          .forEach(instruction => {
+            try {
+              this.move(instruction)
+            } catch (e) {
+              if (e.message === 'command_runner::execute::invalidCommand') {
+                throw new Error(`unexisting_command::${instruction}`)
+              } else {
+                throw e
+              }
             }
-          }
-        })
-      robotReporterService.add(`${this.getPosition().x} ${this.getPosition().y} ${this.getOrientation()}` + (this.isLost ? ' LOST' : ''))
-      this.isLost = false
-    })
+          })
+        robotReporterService.add(`${this.getPosition().x} ${this.getPosition().y} ${this.getOrientation()}` + (this.isLost ? ' LOST' : ''))
+        this.isLost = false
+      })
     return robotReporterService.get('\n')
   }
 
@@ -84,6 +74,31 @@ class RobotService {
 
   getOrientation () {
     return this.orientation.getValue()
+  }
+
+  validateGridCoordinates (grid) {
+    if (grid.width < 0) {
+      throw new Error('invalid_grid_coordinate::WIDTH')
+    }
+    if (grid.height < 0) {
+      throw new Error('invalid_grid_coordinate::HEIGHT')
+    }
+  }
+
+  validatePositionCoordinates (x, y) {
+    if (x < 0 || x > this.grid.width || x > 50) {
+      throw new Error('unexisting_coordinate::X')
+    }
+    if (y < 0 || y > this.grid.height || x > 50) {
+      throw new Error('unexisting_coordinate::Y')
+    }
+  }
+
+  validateInstructions (initCommands, robotCommands) {
+    if (initCommands.length !==
+    robotCommands.length) {
+      throw new Error('invalid_instruction_set_size')
+    }
   }
 }
 

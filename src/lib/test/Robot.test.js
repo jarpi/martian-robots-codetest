@@ -28,12 +28,14 @@ describe('Robot/*', () => {
     expect(robotInstance.getGrid().height).to.be.equal(5)
   })
 
-  it('should not parse Robot initialization coordinates and orientation when no command', async () => {
-    const robotInstance = new RobotService()
-    robotInstance.run('5 5\n1 2 E\n')
-    expect(robotInstance.getPosition().x).to.be.equal(0)
-    expect(robotInstance.getPosition().y).to.be.equal(0)
-    expect(robotInstance.getOrientation()).to.be.equal('N')
+  it('should not parse Robot initialization coordinates and orientation when no command', done => {
+    try {
+      const robotInstance = new RobotService()
+      robotInstance.run('5 5\n1 2 E\n')
+      done('Exception not thrown')
+    } catch (e) {
+      done()
+    }
   })
 
   it('should parse Robot initialization coordinates and orientation', async () => {

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cc9fa6f6-1141-43c0-889e-7ff4dda5a578",
+		"_postman_id": "0471a2a3-cab7-477f-ba1c-aa4da2302891",
 		"name": "Martians-Robot",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "94e83fab-6490-44ef-a5d3-049ad4671ee1",
+						"id": "bea68736-78d1-4be4-83f1-39b1103d0b36",
 						"exec": [
 							"pm.test(\"Your test name\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -64,7 +64,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "445b558a-8a0d-4f00-b983-50a87fbffede",
+						"id": "af0ecffa-8b7e-47e1-b91f-1037b7027bb6",
 						"exec": [
 							"pm.test(\"Your test name\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -117,11 +117,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "445b558a-8a0d-4f00-b983-50a87fbffede",
+						"id": "5e89db90-c3bb-4a3b-8db1-a81546ccdb21",
 						"exec": [
 							"pm.test(\"Your test name\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.output).to.eql('1 1 E\\n3 3 N LOST');",
+							"    pm.expect(jsonData.output).to.eql('1 1 E\\n3 3 N LOST\\n2 3 S');",
 							"});",
 							"pm.test(\"Successful POST request\", function () {",
 							"    pm.expect(pm.response.code).to.be.eql(202);",
@@ -148,7 +148,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"instructions\":\"5 3\\n1 1 E\\nRFRFRFRF\\n3 2 N\\nFRRFLLFFRRFLL\"}"
+					"raw": "{\"instructions\":\"5 3\\n1 1 E\\nRFRFRFRF\\n3 2 N\\nFRRFLLFFRRFLL\\n0 3 W\\nLLFFFLFLFL\"}"
 				},
 				"url": {
 					"raw": "{{HTTP}}://{{HOST}}:{{PORT}}/execute-robot-instructions",
@@ -170,7 +170,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "445b558a-8a0d-4f00-b983-50a87fbffede",
+						"id": "2b7f95af-bc49-4fc1-bd88-53a67ad52f4e",
 						"exec": [
 							"pm.test(\"Your test name\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -223,7 +223,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "445b558a-8a0d-4f00-b983-50a87fbffede",
+						"id": "3e819d43-ba71-4153-80c9-0436b4fc56de",
 						"exec": [
 							"pm.test(\"Your test name\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -270,5 +270,6 @@
 			},
 			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
